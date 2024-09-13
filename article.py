@@ -4,7 +4,34 @@ import re
 
 
 class Article:
+    """ Article class that generates an article from Wikipedia, containing its title, image and views for 2023
+
+        Typical use:
+
+        article = Article()
+        article.generate_article()
+        article.high_res_url = article.get_image()
+        article.get_views()
+
+        Attributes:
+        wikipedia_url: the URL to Wikipedia's API
+        random_url: the extension of the URl with the necessary queries
+        title: the title of the generated article
+        page_id: the id of the generated article to check for images and retrieve title
+        for_image: URL for retrieving the image of the article
+        xml_response: the response from for_image in XML
+        root: root in the XML response to read directly the data from a string retrieved
+        namespace: namespace for the XML response
+        items: items in the XML response
+        image: image item in XML response
+        image_url: the retrieved URL of the image of the article
+        high_res_url: a modification of image_url for the bigger size of 500px
+        total: the total of the article's views during 2023
+
+      """
     def __init__(self):
+        """ Inits Article with necessary variables to access APIs, handle XML parsing,
+        and save title, image and views """
         # Access to Wikipedia API
         self.wikipedia_url = "https://en.wikipedia.org/w/api.php?format=json"
 
@@ -30,6 +57,7 @@ class Article:
         self.total = 0
 
     def generate_article(self):
+        """ Randomly generates a wikipedia article and retrieves the title of the article through Wikipedia API """
         # Retrieve the info
         response = requests.get(self.wikipedia_url + self.random_url).json()
 
@@ -49,6 +77,7 @@ class Article:
 
     # Retrieve the article's image
     def get_image(self):
+        """ Retrieves through XML an image of the generated article and converts it to 500px """
         # URL for retrieving image from Wikipedia API
         self.for_image = (f"http://en.wikipedia.org/w/api.php?action=opensearch"
                           f"&limit=5&format=xml&search={self.title}&namespace=0")
@@ -74,6 +103,7 @@ class Article:
         return self.high_res_url
 
     def get_views(self):
+        """ Retrieves the total amount of Wikipedia views during 2023 of the generated article from Wikimedia API """
         # Headers to access the API
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
