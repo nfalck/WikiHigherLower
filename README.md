@@ -17,7 +17,7 @@ Try it out at https://nfalck.eu.pythonanywhere.com/
 
 - **Frontend**: HTML, CSS, Bootstrap, Jinja2 Templates
 - **Backend**: Flask (Python), Javascript
-- **Hosting**: Render
+- **Hosting**: PythonAnywhere
 
 ## Features
 
