@@ -4,7 +4,7 @@ from flask_bootstrap import Bootstrap5
 from flask_session import Session
 import os
 
-#
+# Initialization of Flask app with Session and Bootstrap
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
