@@ -70,7 +70,6 @@ class Article:
             response = requests.get(self.wikipedia_url + self.random_url).json()
             for key in response['query']['pages']:
                 self.page_id = key
-            print(response)
 
         # Retrieve the article's title
         self.title = response['query']['pages'][self.page_id]['title']
