@@ -10,13 +10,14 @@ Through this project, I refined my Flask and JS knowledge, as well as making API
 
 ## Live Demo
 
+Try it out at https://nfalck.eu.pythonanywhere.com/
 
 
 ## Tech Stack
 
 - **Frontend**: HTML, CSS, Bootstrap, Jinja2 Templates
 - **Backend**: Flask (Python), Javascript
-- **Hosting**: Render
+- **Hosting**: PythonAnywhere
 
 ## Features
 
