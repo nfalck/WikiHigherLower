@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wiki HigherLower</title>
+    {{ bootstrap.load_css() }}
+     <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+</head>
+<body>
+    <h1>Wiki Higher or Lower</h1>
+    <h2>Score: {{ score }}</h2>
+    <section class="articles">
+    <div id="article-1" class="container">
+        <img src="{{ articles[0].high_res_url }}">
+        <h2>{{ articles[0].title }}</h2>
+        <p>had</p>
+        <h2> {{ articles[0].total }}</h2>
+        <p>views in total 2023</p>
+    </div>
+    <div id="article-2" class="container" data-correct="{% if articles[1].total > articles[0].total %}higher{% else %}lower{% endif %}">
+        <img src="{{ articles[1].high_res_url }}">
+        <h2> {{ articles[1].title }}</h2>
+        <p>had</p>
+        <form method="POST">
+                <button onclick="submitGuess('higher')" type="submit" name="guess" value="higher" class="btn btn-outline-light">Higher</button>
+                <button onclick="submitGuess('lower')" type="submit" name="guess" value="lower" class="btn btn-outline-light">Lower</button>
+        </form>
+        <p>views than {{ articles[0].title }}</p>
+    </div>
+    </section>
+    <div class="svg-overlay">
+        <svg width="150" height="150" viewBox="0 0 150 150">
+  <path id="check" d="M10,50 l25,40 l95,-70" />
+    </svg>
+    </div>
+    <div class="svg-overlay">
+    <svg width="150" height="150" viewBox="0 0 150 150">
+  <path id="cross" d="M53.691,50.609l13.467-13.467c0.781-0.781,0.781-2.047,0-2.828c-0.78-0.781-2.048-0.781-2.828,0L50.863,47.781
+		L37.398,34.314c-0.78-0.781-2.047-0.781-2.828,0s-0.781,2.047,0,2.828l13.465,13.467L33.742,64.902
+		c-0.781,0.781-0.781,2.047,0,2.828c0.39,0.391,0.902,0.586,1.414,0.586s1.024-0.195,1.414-0.586l14.293-14.293L65.156,67.73
+		c0.391,0.391,0.902,0.586,1.414,0.586s1.023-0.195,1.414-0.586c0.781-0.781,0.781-2.047,0-2.828L53.691,50.609z" />
+    </svg>
+    </div>
+<script>
+    function submitGuess(guess) {
+            // Select elements
+            form = document.querySelector('form');
+            article1 = document.getElementById('article-1');
+            article2 = document.getElementById('article-2');
+            check = document.getElementById('check');
+            cross = document.getElementById('cross');
+
+            // Trigger animation
+            article1.classList.add('slide-out-left');
+            article2.classList.add('slide-out-left');
+
+            // Trigger feedback pop up for correct/incorrect answer
+            correct = (guess === "higher" && article2.dataset.correct === "higher") ||
+                        (guess === "lower" && article2.dataset.correct === "lower");
+
+            if (correct) {
+            check.classList.add('draw')
+            } else {
+            cross.classList.add('draw')
+            }
+
+            // Wait for animation to finish before submitting the form
+            setTimeout(function() {
+            }, 1000); // Animation duration (match with CSS duration)
+        }
+</script>
+
+</body>
+</html>
