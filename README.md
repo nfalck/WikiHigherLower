@@ -71,6 +71,7 @@ Open your browser and navigate to http://localhost:5002.
 
 - Modernize the styling of the website with smoother animations
 - Exception Handling
+- Add summary of every article
 
 ## License
 
